@@ -7,16 +7,14 @@ import java.util.List;
 
 @RestController
 public class NameController {
+    private final NameService nameService;
 
-    private final NameMapper nameMapper;
-
-    public NameController(NameMapper nameMapper) {
-        this.nameMapper = nameMapper;
+    public NameController(NameService nameService) {
+        this.nameService = nameService;
     }
 
     @GetMapping("/names")
     public List<Name> getNames() {
-        List<Name> names = nameMapper.findAll();
-        return names;
+        return nameService.findAll();
     }
 }
