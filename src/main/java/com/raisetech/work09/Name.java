@@ -1,7 +1,10 @@
 package com.raisetech.work09;
 
 public class Name {
+
+
     private int id;
+
     private String name;
 
     public Name(int id, String name) {

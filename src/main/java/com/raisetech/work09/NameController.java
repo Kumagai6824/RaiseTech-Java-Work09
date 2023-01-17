@@ -1,8 +1,5 @@
 package com.raisetech.work09;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,12 +22,9 @@ public class NameController {
         return nameService.findAll();
     }
 
-    @GetMapping("/names/find/{id}")
+    @GetMapping("/names/ids/{id}")
     public Name findById(
             @PathVariable(value = "id")
-            @Valid
-            @NotNull
-            @Min(1)
             int id) throws Exception {
         return nameService.findById(id);
 
