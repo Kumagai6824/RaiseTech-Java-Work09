@@ -1,5 +1,10 @@
 package com.raisetech.work09;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Getter
 public class Name {
 
 
@@ -7,16 +12,16 @@ public class Name {
 
     private String name;
 
-    public Name(int id, String name) {
+/*    public Name(int id, String name) {
         this.id = id;
         this.name = name;
-    }
+    }*/
 
-    public int getId() {
+/*    public int getId() {
         return this.id;
     }
 
     public String getName() {
         return this.name;
-    }
+    }*/
 }

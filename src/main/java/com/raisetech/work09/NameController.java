@@ -22,7 +22,7 @@ public class NameController {
         return nameService.findAll();
     }
 
-    @GetMapping("/names/ids/{id}")
+    @GetMapping("/names/{id}")
     public Name findById(
             @PathVariable(value = "id")
             int id) throws Exception {
