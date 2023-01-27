@@ -1,11 +1,11 @@
 package com.raisetech.work09;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@RequiredArgsConstructor
 @Getter
-public class Name {
+@Setter
+public class CreateForm {
     private int id;
     private String name;
 }

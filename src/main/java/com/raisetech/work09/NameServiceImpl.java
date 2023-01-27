@@ -25,4 +25,9 @@ public class NameServiceImpl implements NameService {
         });
         return nameWithId;
     }
+
+    @Override
+    public void createName(CreateForm form) {
+        nameMapper.createName(form);
+    }
 }

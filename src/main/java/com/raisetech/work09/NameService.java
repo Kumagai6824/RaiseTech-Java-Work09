@@ -6,4 +6,6 @@ public interface NameService {
     List<Name> findAll();
 
     Name findById(int id) throws Exception;
+
+    void createName(CreateForm form);
 }
