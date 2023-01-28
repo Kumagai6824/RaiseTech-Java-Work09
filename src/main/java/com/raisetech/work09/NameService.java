@@ -8,4 +8,6 @@ public interface NameService {
     Name findById(int id) throws Exception;
 
     void createName(CreateForm form);
+
+    void deleteById(int id);
 }

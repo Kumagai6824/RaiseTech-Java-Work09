@@ -40,4 +40,12 @@ public class NameController {
         String name = createForm.getName();
         return ResponseEntity.created(url).body(Map.of("message", "name:" + name + " was successfully registered"));
     }
+
+    @DeleteMapping("/names/{id}")
+    public Map<String, String> delteById(
+            @PathVariable(value = "id")
+            int id) {
+        nameService.deleteById(id);
+        return Map.of("message", "id: " + id + " was successfully deleted");
+    }
 }

@@ -30,4 +30,9 @@ public class NameServiceImpl implements NameService {
     public void createName(CreateForm form) {
         nameMapper.createName(form);
     }
+
+    @Override
+    public void deleteById(int id) {
+        nameMapper.deleteById(id);
+    }
 }

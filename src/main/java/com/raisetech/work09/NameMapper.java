@@ -1,9 +1,6 @@
 package com.raisetech.work09;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,5 +16,8 @@ public interface NameMapper {
     @Insert("INSERT INTO names (id, name) values (#{id}, #{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createName(CreateForm form);
+
+    @Delete("DELETE FROM names where id = #{id}")
+    void deleteById(int id);
 
 }
