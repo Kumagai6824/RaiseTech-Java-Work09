@@ -34,11 +34,11 @@ public class NameController {
 
     @PostMapping("/names")
     public ResponseEntity<Map<String, String>> postUser(@RequestBody @Validated CreateForm form, UriComponentsBuilder uriComponentsBuilder) {
-        nameService.createName(form);
-        URI url = uriComponentsBuilder.path("/names/" + form.getId()).build().toUri();
-        CreateForm createForm = new CreateForm();
-        String name = createForm.getName();
-        return ResponseEntity.created(url).body(Map.of("message", "name:" + name + " was successfully registered"));
+        Name name = new Name();
+        name.setName(form.getName());
+        nameService.createName(name);
+        URI url = uriComponentsBuilder.path("/names/").build().toUri();
+        return ResponseEntity.created(url).body(Map.of("message", "name:" + name.getName() + " was successfully registered"));
     }
 
     @DeleteMapping("/names/{id}")

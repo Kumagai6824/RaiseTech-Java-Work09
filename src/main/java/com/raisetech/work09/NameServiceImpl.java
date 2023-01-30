@@ -27,8 +27,8 @@ public class NameServiceImpl implements NameService {
     }
 
     @Override
-    public void createName(CreateForm form) {
-        nameMapper.createName(form);
+    public void createName(Name name) {
+        nameMapper.createName(name);
     }
 
     @Override

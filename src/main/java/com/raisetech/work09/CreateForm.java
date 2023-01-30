@@ -6,6 +6,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateForm {
-    private int id;
     private String name;
+
+    public CreateForm() {
+
+    }
+
+    public CreateForm(String name) {
+        this.name = name;
+    }
+
+
 }

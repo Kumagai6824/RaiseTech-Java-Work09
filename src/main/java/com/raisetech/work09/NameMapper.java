@@ -13,9 +13,9 @@ public interface NameMapper {
     @Select("SELECT * FROM names where id = #{id}")
     Optional<Name> findById(int id);
 
-    @Insert("INSERT INTO names (id, name) values (#{id}, #{name})")
+    @Insert("INSERT INTO names (name) values (#{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void createName(CreateForm form);
+    void createName(Name name);
 
     @Delete("DELETE FROM names where id = #{id}")
     void deleteById(int id);
