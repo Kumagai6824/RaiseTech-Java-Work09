@@ -11,7 +11,6 @@ public class Name {
 
     public int getId() {
         return id;
-
     }
 
     public String getName() {
