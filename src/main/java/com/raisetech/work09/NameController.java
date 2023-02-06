@@ -12,8 +12,8 @@ import java.util.Map;
 @RestController
 @Validated
 public class NameController {
-
     private final NameService nameService;
+
 
     public NameController(NameService nameService) {
         this.nameService = nameService;
