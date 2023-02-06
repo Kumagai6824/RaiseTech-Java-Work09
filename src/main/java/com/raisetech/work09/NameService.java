@@ -7,7 +7,7 @@ public interface NameService {
 
     Name findById(int id) throws Exception;
 
-    void createName(CreateForm form);
+    void createName(Name name);
 
     void deleteById(int id);
 }
