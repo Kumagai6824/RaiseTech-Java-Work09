@@ -45,15 +45,12 @@ public class NameController {
     @PatchMapping("/names/{id}")
     public ResponseEntity<Map<String, String>> patchById(
             @RequestBody @Validated UpdateForm form,
-            @PathVariable(value = "id") int id,
-            UriComponentsBuilder uriComponentsBuilder) throws Exception {
+            @PathVariable(value = "id") int id) throws Exception {
         Name entity = form.convertToNameEntity();
         String name = entity.getName();
         String previousName = nameService.findById(id).getName();
         nameService.patchById(id, name);
-        String newName = entity.getName();
-        URI url = uriComponentsBuilder.path("/names/" + id).build().toUri();
-        return ResponseEntity.created(url).body(Map.of("message", "id < " + id + " > was successfully updated from " + previousName + " to " + newName));
+        return ResponseEntity.ok(Map.of("message", "id < " + id + " > was successfully updated from " + previousName + " to " + name));
     }
 
     @DeleteMapping("/names/{id}")

@@ -32,8 +32,10 @@ public class NameServiceImpl implements NameService {
     }
 
     @Override
-    public void patchById(int id, String name) {
-
+    public void patchById(int id, String name) throws Exception {
+        nameMapper.findById(id).orElseThrow(() -> {
+            return new NotFoundException("Id does not exist");
+        });
         nameMapper.patchById(id, name);
     }
 
