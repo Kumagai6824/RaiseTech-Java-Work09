@@ -17,6 +17,10 @@ public interface NameMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createName(Name name);
 
+    @Update("UPDATE names SET name = #{name} WHERE id =#{id}")
+        //未完成
+    void patchById(int id, String name);
+
     @Delete("DELETE FROM names where id = #{id}")
     void deleteById(int id);
 

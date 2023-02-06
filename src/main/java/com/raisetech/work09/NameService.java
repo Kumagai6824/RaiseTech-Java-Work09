@@ -9,5 +9,7 @@ public interface NameService {
 
     void createName(Name name);
 
+    void patchById(int id, String name);
+
     void deleteById(int id);
 }

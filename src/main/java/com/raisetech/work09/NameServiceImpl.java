@@ -32,6 +32,12 @@ public class NameServiceImpl implements NameService {
     }
 
     @Override
+    public void patchById(int id, String name) {
+
+        nameMapper.patchById(id, name);
+    }
+
+    @Override
     public void deleteById(int id) {
         nameMapper.deleteById(id);
     }
