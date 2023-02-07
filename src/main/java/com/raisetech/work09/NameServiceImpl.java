@@ -19,11 +19,8 @@ public class NameServiceImpl implements NameService {
     }
 
     @Override
-    public Name findById(int id) throws Exception {
-        Name nameWithId = nameMapper.findById(id).orElseThrow(() -> {
-            return new NotFoundException("Name not found with id" + id);
-        });
-        return nameWithId;
+    public Name findById(int id) {
+        return this.nameMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found with id: " + id));
     }
 
     @Override
@@ -33,9 +30,7 @@ public class NameServiceImpl implements NameService {
 
     @Override
     public void patchById(int id, String name) throws Exception {
-        nameMapper.findById(id).orElseThrow(() -> {
-            return new NotFoundException("Id does not exist");
-        });
+        nameMapper.findById(id).orElseThrow(() -> new NotFoundException("Id does not exist"));
         nameMapper.patchById(id, name);
     }
 
