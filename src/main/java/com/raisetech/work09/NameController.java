@@ -59,7 +59,7 @@ public class NameController {
     @DeleteMapping("/names/{id}")
     public Map<String, String> deleteById(
             @PathVariable(value = "id")
-            int id) {
+            int id) throws Exception {
         nameService.deleteById(id);
         return Map.of("message", "id: " + id + " was successfully deleted");
     }

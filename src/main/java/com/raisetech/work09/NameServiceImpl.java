@@ -1,6 +1,5 @@
 package com.raisetech.work09;
 
-import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,13 +28,14 @@ public class NameServiceImpl implements NameService {
     }
 
     @Override
-    public void patchById(int id, String name) throws Exception {
-        nameMapper.findById(id).orElseThrow(() -> new NotFoundException("Id does not exist"));
+    public void patchById(int id, String name) {
+        nameMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found with id: " + id));
         nameMapper.patchById(id, name);
     }
 
     @Override
     public void deleteById(int id) {
+        nameMapper.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found with id: " + id));
         nameMapper.deleteById(id);
     }
 }
