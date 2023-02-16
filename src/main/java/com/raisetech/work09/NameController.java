@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -25,6 +26,16 @@ public class NameController {
     @GetMapping("/names")
     public List<Name> getNames() {
         return nameService.findAll();
+    }
+
+    @GetMapping("/postcodes")
+    public String response() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://map.yahooapis.jp/search/zip/V1/zipCodeSearch?query=105-0011&appid=dj00aiZpPU03TlZodFRtdWRObyZzPWNvbnN1bWVyc2VjcmV0Jng9ODY-"; //IDはpush時削除
+        ResponseEntity<String> response =
+                restTemplate.getForEntity(url, String.class);
+        String json = response.getBody();
+        return json;
     }
 
     @GetMapping("/names/{id}")
