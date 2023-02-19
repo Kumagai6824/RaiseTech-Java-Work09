@@ -11,5 +11,5 @@ public interface NameService {
 
     void patchById(int id, String name) throws Exception;
 
-    void deleteById(int id);
+    void deleteById(int id) throws Exception;
 }
