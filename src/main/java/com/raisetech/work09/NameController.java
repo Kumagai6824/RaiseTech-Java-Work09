@@ -33,7 +33,7 @@ public class NameController {
     @GetMapping("/postcodes")
     public String response() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://map.yahooapis.jp/search/zip/V1/zipCodeSearch?query=105-0011&appid=dj00aiZpPXVXZHIwallMU2I1ZSZzPWNvbnN1bWVyc2VjcmV0Jng9NDQ-"; //IDはpush時削除
+        String url = "https://map.yahooapis.jp/search/zip/V1/zipCodeSearch?query=105-0011&appid=dj00aiZpPWdpNUJZcWhVN2Q4NyZzPWNvbnN1bWVyc2VjcmV0Jng9NjU-"; //IDはpush時削除
         restTemplate.getMessageConverters()
                 .stream()
                 .filter(StringHttpMessageConverter.class::isInstance)
@@ -68,9 +68,8 @@ public class NameController {
             @PathVariable(value = "id") int id) throws Exception {
         Name entity = form.convertToNameEntity();
         String name = entity.getName();
-        String previousName = nameService.findById(id).getName();
         nameService.patchById(id, name);
-        return ResponseEntity.ok(Map.of("message", "id < " + id + " > was successfully updated from " + previousName + " to " + name));
+        return ResponseEntity.ok(Map.of("message", "id < " + id + " > was successfully updated to " + name));
     }
 
     @DeleteMapping("/names/{id}")
