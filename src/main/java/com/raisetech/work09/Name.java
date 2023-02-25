@@ -3,6 +3,8 @@ package com.raisetech.work09;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @RequiredArgsConstructor
 @Setter
 public class Name {
@@ -19,5 +21,17 @@ public class Name {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Name name1)) return false;
+        return id == name1.id && name.equals(name1.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
