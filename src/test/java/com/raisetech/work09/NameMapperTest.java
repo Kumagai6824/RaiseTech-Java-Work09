@@ -37,4 +37,15 @@ class NameMapperTest {
                 );
     }
 
+    @Test
+    @Sql(
+            scripts = {"classpath:/delete-names.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Transactional
+    void レコードが存在しないときに取得されるListが空であること() {
+        List<Name> names = nameMapper.findAll();
+        assertThat(names).isEmpty();
+    }
+
 }
