@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @MybatisTest
@@ -59,7 +59,7 @@ class NameMapperTest {
         Name name = new Name();
         name.setName("Kumagai");
         nameMapper.createName(name);
-        assertNotEquals((Integer) null, name.getId());
+        assertNotNull(name.getId());
         assertThat(nameMapper.findById(1)).contains(new Name(1, "Kumagai"));
     }
 
