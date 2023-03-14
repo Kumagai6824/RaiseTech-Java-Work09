@@ -34,20 +34,23 @@ public class UserRestApiIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        JSONAssert.assertEquals("[" +
-                " {" +
-                " \"id\": 1," +
-                " \"name\": \"清水\"" +
-                " }," +
-                " {" +
-                " \"id\": 2," +
-                " \"name\": \"小山\"" +
-                " }," +
-                " {" +
-                " \"id\": 3," +
-                " \"name\": \"田中\"" +
-                " }" +
-                "]", response, JSONCompareMode.STRICT);
+        JSONAssert.assertEquals("""
+                         [
+                            {
+                               "id":1,
+                               "name":"清水"
+                            },
+                            {
+                               "id":2,
+                               "name":"小山"
+                            },
+                            {
+                               "id":3,
+                               "name":"田中"
+                            }
+                         ]           
+                        """
+                , response, JSONCompareMode.STRICT);
 
     }
 }
