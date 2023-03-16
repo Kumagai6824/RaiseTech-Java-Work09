@@ -38,7 +38,7 @@ public class UserRestApiIntegrationTest {
                          [
                             {
                                "id":1,
-                               "name":"清水"
+                               "name":"清"
                             },
                             {
                                "id":2,
