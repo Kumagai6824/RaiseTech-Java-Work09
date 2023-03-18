@@ -15,12 +15,14 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'temurin'
+          cache: 'gradle'
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Conduct Tests
         run: ./gradlew test
+        if: always()
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
@@ -34,7 +36,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: 'github-pr-check'
-          tool_name: 'reviewdog'
+          tool_name: 'testtool'
           checkstyle_config: 'config/checkstyle/checkstyle.xml'
           workdir: 'src/main'
           level: warning
