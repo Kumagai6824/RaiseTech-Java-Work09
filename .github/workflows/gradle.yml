@@ -25,7 +25,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Conduct Tests
-        run: ./gradlew test
+        run: gradle test
         if: always()
 
       - name: Publish Test Report
