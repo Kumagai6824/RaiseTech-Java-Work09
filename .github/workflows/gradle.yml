@@ -1,32 +1,26 @@
-name: Test Report, Checkstyle, SpotBugs, Notify in Slack and Codecov CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-
+name: Java CI with Gradle
+on: [ pull_request ]
+permissions:
+  contents: read
+  checks: write
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Run Test and Send Report
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
+      - name: Run Docker
+        run: docker compose up -d
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'
-          cache: 'gradle'
+          distribution: 'adopt'
 
-      - name: Docker run
-        run: docker compose up -d
-
-      - name: Test with Gradle
-        id: test
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Conduct Tests
         run: ./gradlew test
-        if: always()
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
@@ -34,48 +28,13 @@ jobs:
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
 
-          #- name: Run check style
-          #id: checkstyle
-          #uses: nikitasavinov/checkstyle-action@master
-          #if: always()
-          #with:
-          #github_token: ${{ secrets.GITHUB_TOKEN }}
-          #reporter: 'github-pr-check'
-          #tool_name: 'testtool'
-          #level: error
-          #checkstyle_config: 'config/checkstyle/checkstyle.xml'
-          #workdir: 'src/main'
-
-      - name: Run SpotBugs
-        id: spotbugs
-        run: ./gradlew spotbugsMain
-        if: always()
-
-      - name: Upload SpotBugs Report
-        uses: actions/upload-artifact@v1
+      - name: Run Checkstyle
+        uses: nikitasavinov/checkstyle-action@master
         if: always()
         with:
-          name: test results
-          path: build/reports/spotbugs/main.html
-
-          #- name: Upload coverage to Codecov
-          #uses: codecov/codecov-action@v3
-          #if: always()
-
-          #- name: Slack Notification
-          # if: always()
-          #uses: rtCamp/action-slack-notify@v2
-          #env:
-          #SLACK_CHANNEL: general
-          #SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          #SLACK_ICON: https://github.com/rtCamp.png?size=48
-          #SLACK_MESSAGE: 'Post Content :rocket:'
-          #SLACK_TITLE: Post Title
-          #SLACK_USERNAME: rtCamp
-        #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-      - name: Save state
-        run: echo "{name}={value}" >> $GITHUB_STATE
-
-      - name: Set output
-        run: echo "{name}={value}" >> $GITHUB_OUTPUT
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: 'github-pr-check'
+          tool_name: 'reviewdog'
+          checkstyle_config: 'config/checkstyle/checkstyle.xml'
+          workdir: 'src/main'
+          level: warning
