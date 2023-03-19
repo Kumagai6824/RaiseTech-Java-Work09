@@ -13,9 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3308/name_list
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: ${{secrets.SECRET_SPRING_DATASOURCE_URL}}
+      SPRING_DATASOURCE_USERNAME: ${{secrets.SECRET_SPRING_DATASOURCE_USERNAME}}
+      SPRING_DATASOURCE_PASSWORD: ${{secrets.SECRET_SPRING_DATASOURCE_PASSWORD}}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
