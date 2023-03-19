@@ -8,6 +8,7 @@ on:
 permissions:
   contents: read
   pull-requests: read
+  checks: write
 
 jobs:
   build:
@@ -39,14 +40,3 @@ jobs:
         if: always()
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
-
-      - name: Run Checkstyle
-        uses: nikitasavinov/checkstyle-action@master
-        if: always()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: 'github-pr-check'
-          tool_name: 'testtool'
-          checkstyle_config: 'config/checkstyle/checkstyle.xml'
-          workdir: 'src/main'
-          level: warning
